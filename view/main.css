@@ -1,0 +1,33 @@
+@font-face {
+	font-family: "League Spartan";
+	src: url("LeagueSpartan-Bold.otf");
+}
+
+.add_button {
+	-fx-border-radius: 100%;
+	-fx-border-width: 4px;
+	-fx-border-color: #316079;
+	-fx-background-color: none;
+	-fx-text-fill: #316079;
+}
+
+.add_button:hover {
+	-fx-text-fill: white;
+	-fx-background-radius: 100%;
+	-fx-background-color: #316079;
+}
+
+.arrow_button {
+	-fx-background-color: none;
+	-fx-border: none;
+	-fx-text-fill: white;
+}
+
+.header_grid_pane {
+	-fx-background-color: #316079;
+}
+
+.title {
+	-fx-text-fill: white;
+	-fx-font-family: "League Spartan";
+}
