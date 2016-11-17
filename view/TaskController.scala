@@ -56,6 +56,22 @@ class TaskController(
     }
   }
   
+  // View task after clicking button
+  def viewTask() = {
+    val selectedIndex = taskTable.selectionModel().selectedIndex.value
+    if (selectedIndex >= 0) {
+      val selectedTask = Application.data.getTasks()(selectedIndex)
+      val onClicked = Application.showViewTaskDialog(selectedTask)
+    } else {
+      val alert = new Alert(AlertType.Warning){
+          initOwner(Application.stage)
+          title       = "No Selection"
+          headerText  = "No Task Selected"
+          contentText = "Please select a task in the table."
+        }.showAndWait()
+    }
+  }
+  
   // Might need to be refactored
   def viewDoneTasks() = {
     viewTasks("Done")

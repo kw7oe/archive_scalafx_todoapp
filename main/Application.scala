@@ -14,7 +14,7 @@ import model.Task
 import database.FileData
 import javafx.{scene => jfxs}
 import scalafx.stage.Modality
-import view.{AddTaskDialogController, EditTaskDialogController}
+import view.{AddTaskDialogController, EditTaskDialogController, ViewTaskDialogController}
 
 object Application extends JFXApp {  
   val rootResource = getClass.getResourceAsStream("../view/RootLayout.fxml")  
@@ -67,6 +67,25 @@ object Application extends JFXApp {
     loader.load(resource)
     val root2 = loader.getRoot[jfxs.layout.AnchorPane]
     val controller = loader.getController[EditTaskDialogController#Controller]
+    val dialog = new Stage() {
+      initModality(Modality.APPLICATION_MODAL)
+      initOwner(stage)
+      scene = new Scene {
+        root = root2
+      }
+    }
+    controller.dialogStage = dialog
+    controller.task = task
+    dialog.showAndWait();
+    return controller.okClicked;
+  }
+  
+  def showViewTaskDialog(task: Task) : Boolean = {
+    val resource = getClass.getResourceAsStream("../view/ViewTaskDialog.fxml")
+    val loader = new FXMLLoader(null, NoDependencyResolver)
+    loader.load(resource)
+    val root2 = loader.getRoot[jfxs.layout.AnchorPane]
+    val controller = loader.getController[ViewTaskDialogController#Controller]
     val dialog = new Stage() {
       initModality(Modality.APPLICATION_MODAL)
       initOwner(stage)

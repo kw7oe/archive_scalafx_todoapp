@@ -57,7 +57,7 @@
             <Button fx:id="doneButton" mnemonicParsing="false" onAction="#checkTaskDone" text="Done" />
             <Button fx:id="editButton" layoutX="43.0" layoutY="505.0" mnemonicParsing="false" onAction="#editTask" text="Edit" />
             <Button fx:id="removeButton" layoutX="167.0" layoutY="505.0" mnemonicParsing="false" onAction="#removeTask" text="Remove" />
-            <Button fx:id="viewButton" layoutX="312.0" layoutY="505.0" mnemonicParsing="false" text="View" />
+            <Button fx:id="viewButton" layoutX="312.0" layoutY="505.0" mnemonicParsing="false" onAction="#viewTask" text="View" />
          </children>
       </HBox>
    </children>
