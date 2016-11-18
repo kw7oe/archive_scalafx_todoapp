@@ -31,3 +31,12 @@
 	-fx-text-fill: white;
 	-fx-font-family: "League Spartan";
 }
+
+.task_name {
+	-fx-font-family: "League Spartan";
+}
+
+.task_list {
+	-fx-font-size: 24px;
+	
+}

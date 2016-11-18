@@ -4,7 +4,7 @@ import model.Task
 import main.Application
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.GridPane
-import scalafx.scene.control.{TableView, TableColumn, Label, ListView, ListCell, Button}
+import scalafx.scene.control.{TableView, TableColumn, TableCell, Label, ListView, ListCell, Button}
 import scalafx.scene.control.SelectionModel
 import scalafxml.core.macros.sfxml
 import scalafx.beans.property.{StringProperty, ObjectProperty} 
@@ -14,9 +14,7 @@ import scalafx.scene.control.Alert.AlertType
 
 @sfxml
 class TaskController(
-  private val taskTable: TableView[Task],
-  private val taskNameColumn: TableColumn[Task, String],
-  private val secondColumn: TableColumn[Task, String],
+  private val taskList: ListView[Task],
   private val viewDone: Button,
   private val viewDefault: Button,
   private val addButton: Button,
@@ -29,7 +27,7 @@ class TaskController(
   var currentView = "Default"
   updateUI()
   viewDefault.visible = false
-  
+
   // Add task after clicking button
   def addTask() = {
     val tempTask = Task("", "", "Default")
@@ -42,7 +40,7 @@ class TaskController(
   
   // Edit task after clicking button
   def editTask() = {
-    val selectedIndex = taskTable.selectionModel().selectedIndex.value
+    val selectedIndex = taskList.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) {
       val selectedTask = Application.data.getTasks()(selectedIndex)
       val onClicked = Application.showEditTaskDialog(selectedTask)
@@ -81,7 +79,7 @@ class TaskController(
   }
   
   def checkTaskDone() = {
-    val selectedIndex = taskTable.selectionModel().selectedIndex.value
+    val selectedIndex = taskList.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) {
       Application.data.doneTaskAt(selectedIndex)
       updateUI()
@@ -90,7 +88,7 @@ class TaskController(
   }
   
   def removeTask() = {
-    val selectedIndex = taskTable.selectionModel().selectedIndex.value
+    val selectedIndex = taskList.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) {
       Application.data.removeTaskAt(selectedIndex, currentView)
       updateUI()
@@ -108,9 +106,7 @@ class TaskController(
   private def setTableView(data: Option[ObservableBuffer[Task]]) {
     data match {
       case Some(i) => {
-        taskTable.setItems(i)
-        taskNameColumn.cellValueFactory = {_.value.name}
-        secondColumn.cellValueFactory = {_.value.status}
+        taskList.setItems(i)
       }         
       case None => println("List is Empty")
     }
