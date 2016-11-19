@@ -16,7 +16,6 @@ class FileData {
 	
 	// Done Tasks
 	private var doneTasks = new ObservableBuffer[Task]()
-	private var doneTasksFileName = "done.csv"
 	
 	def readFile() {
 	  try {
@@ -41,7 +40,6 @@ class FileData {
 	private def writeFile() {
 	  try {
 	    val file = new File(fileName)
-	    val doneFile = new File(doneTasksFileName)
 	    val bw = new BufferedWriter(new FileWriter(file))
 	    // Can be refactored
 	    for(task <- tasks) {
@@ -91,6 +89,10 @@ class FileData {
 	  
 	  // Remove Task for tasks, and append to doneTasks
 	  doneTasks.append(tasks.remove(index))
+	  writeFile()
+	}
+	
+	def editTaskAt() {
 	  writeFile()
 	}
 	

@@ -1,6 +1,6 @@
 package view
 
-import scalafx.scene.control.{ListCell, Label, CheckBox}
+import scalafx.scene.control.{ListCell, Label, CheckBox, MenuItem}
 import scalafx.scene.layout.AnchorPane
 import model.Task
 import scalafxml.core.macros.sfxml
@@ -11,31 +11,49 @@ import main.Application
 @sfxml
 class ToDoTaskListController(
     private val taskName: Label,
-    private val taskStatus: CheckBox,
-    private val anchorPane: AnchorPane
+    private val taskCheckBox: CheckBox,
+    private val editMenuItem: MenuItem,
+    private val viewMenuItem: MenuItem,
+    private val deleteMenuItem: MenuItem
     ) {
     var index: Int = _
-    def setText(value: String) {
-       taskName.text = value     
-    }
-    def getTaskName : String = {
-      return taskName.text.value
-    }
+    private var _task: Task = null
     
-    def setStatus(value: String) {
-       val result: Boolean= value match {
+    def task = _task
+    
+    def task_=(task: Task) {
+      _task = task
+      
+      taskName.text = task.name.value
+      val result: Boolean = task.status.value match {
             case "Done" => true
             case _ => false
          }
-        taskStatus.selected = result
-    }    
+      if (result) hideCheckBox
+      taskCheckBox.selected = result
+    }   
     
     def markTaskDone() {
       Application.data.doneTaskAt(index)
     }
     
+    def deleteTask() {
+      println(task)
+      Application.data.removeTaskAt(index, task.status.value)
+    }
+    
+    def editTask() {
+      val onClicked = Application.showEditTaskDialog(task)
+      if (onClicked) {
+          Application.data.editTaskAt()  
+       }
+    }
+    
+    def viewTask() {
+      
+    }
     def hideCheckBox {
-      taskStatus.visible = false
+      taskCheckBox.visible = false
     }
 
 }

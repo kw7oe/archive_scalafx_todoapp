@@ -47,6 +47,10 @@ class TaskController(
     if (selectedIndex >= 0) {
       val selectedTask = Application.data.getTasks()(selectedIndex)
       val onClicked = Application.showEditTaskDialog(selectedTask)
+       if (onClicked) {
+          Application.data.editTaskAt()
+          updateUI()     
+       }
     } else {
       val alert = new Alert(AlertType.Warning){
           initOwner(Application.stage)
@@ -99,8 +103,10 @@ class TaskController(
   }
   
   def updateUI() {
+    println("Updating UI")
     setTableView(Application.data.getTasksBasedOn(currentView)) 
   }
+  
   private def viewTasks(status: String = "Default") = {
     val tempData = Application.data.getTasksBasedOn(status = status)
     setTableView(tempData) 
@@ -110,7 +116,6 @@ class TaskController(
     data match {
       case Some(i) => {
         taskList.setItems(i)
-        println(s"List items:  ${taskList.items}")
       }         
       case None => println("List is Empty")
     }
@@ -129,12 +134,8 @@ class TaskController(
             loader.load(resource)    
             val root = loader.getRoot[jfxs.layout.AnchorPane]
             val controller = loader.getController[ToDoTaskListController#Controller]
-            controller.setText(task.value.name.value)
-            if (task.value.status.value == "Done") {
-              controller.hideCheckBox
-            }
-            controller.setStatus(task.value.status.value)
             controller.index = this.index.value
+            controller.task = task.value         
             graphic = root
           }
         }
