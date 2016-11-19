@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ToDoTaskListController">
+   <children>
+      <Label fx:id="taskName" layoutX="14.0" layoutY="6.0" text="Label" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+      <CheckBox fx:id="taskStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" onAction="#markTaskDone" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" />
+   </children>
+</AnchorPane>

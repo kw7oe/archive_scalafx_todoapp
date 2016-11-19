@@ -9,24 +9,6 @@
 
 <AnchorPane minHeight="600.0" minWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TaskController">
    <children>
-      <GridPane alignment="CENTER" layoutY="505.0" prefHeight="65.0" prefWidth="400.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTask" styleClass="add_button" text="+" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font size="30.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </GridPane>
       <GridPane fx:id="header" prefHeight="57.0" prefWidth="400.0" styleClass="header_grid_pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="SOMETIMES" minWidth="20.0" prefWidth="71.0" />
@@ -44,7 +26,7 @@
             </Label>
          </children>
       </GridPane>
-      <ListView fx:id="taskList" layoutX="8.0" layoutY="103.0" prefHeight="338.0" prefWidth="384.0" styleClass="task_list" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0" />
+      <ListView fx:id="taskList" layoutX="8.0" layoutY="103.0" styleClass="task_list" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="100.0" />
       <GridPane layoutX="138.0" layoutY="65.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="65.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
@@ -57,7 +39,7 @@
             <Button fx:id="viewDone" alignment="CENTER" layoutX="138.0" layoutY="65.0" mnemonicParsing="false" onAction="#viewDoneTasks" text="Completed Tasks" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
-      <GridPane layoutX="41.0" layoutY="456.0" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <GridPane layoutX="41.0" layoutY="456.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
          </columnConstraints>
@@ -73,6 +55,24 @@
                   <Button fx:id="viewButton" layoutX="312.0" layoutY="505.0" mnemonicParsing="false" text="View" />
                </children>
             </HBox>
+         </children>
+      </GridPane>
+      <GridPane alignment="CENTER" layoutY="505.0" prefHeight="65.0" prefWidth="400.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTask" styleClass="add_button" text="+" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="30.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
          </children>
       </GridPane>
    </children>

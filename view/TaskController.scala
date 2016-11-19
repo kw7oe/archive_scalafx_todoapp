@@ -9,8 +9,10 @@ import scalafx.scene.control.SelectionModel
 import scalafxml.core.macros.sfxml
 import scalafx.beans.property.{StringProperty, ObjectProperty} 
 import scalafx.Includes._
+import javafx.{scene => jfxs}
 import scalafx.scene.control.Alert
 import scalafx.scene.control.Alert.AlertType
+import scalafxml.core.{NoDependencyResolver, FXMLLoader}
 
 @sfxml
 class TaskController(
@@ -27,6 +29,7 @@ class TaskController(
   var currentView = "Default"
   updateUI()
   viewDefault.visible = false
+  setUpCell()
 
   // Add task after clicking button
   def addTask() = {
@@ -95,7 +98,7 @@ class TaskController(
     }
   }
   
-  private def updateUI() {
+  def updateUI() {
     setTableView(Application.data.getTasksBasedOn(currentView)) 
   }
   private def viewTasks(status: String = "Default") = {
@@ -107,9 +110,36 @@ class TaskController(
     data match {
       case Some(i) => {
         taskList.setItems(i)
+        println(s"List items:  ${taskList.items}")
       }         
       case None => println("List is Empty")
     }
    
+  }
+  
+  private def setUpCell() {
+    taskList.cellFactory = { _ =>
+      new ListCell[Task]() {  
+        item.onChange { (task, oldValue, newValue) => {
+          if (newValue == null) {
+            graphic = null
+          } else {
+            val loader = new FXMLLoader(null, NoDependencyResolver)
+            val resource = getClass.getResourceAsStream("../view/ToDoTaskListCell.fxml")
+            loader.load(resource)    
+            val root = loader.getRoot[jfxs.layout.AnchorPane]
+            val controller = loader.getController[ToDoTaskListController#Controller]
+            controller.setText(task.value.name.value)
+            if (task.value.status.value == "Done") {
+              controller.hideCheckBox
+            }
+            controller.setStatus(task.value.status.value)
+            controller.index = this.index.value
+            graphic = root
+          }
+        }
+        }
+      }
+    } 
   }
 }

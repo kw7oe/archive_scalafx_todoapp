@@ -6,13 +6,11 @@ import scalafx.scene.Scene
 import scalafx.stage.Stage
 import scalafx.scene.control.{Dialog, DialogPane}
 import scalafx.Includes._
-import javafx.{scene => jfxs}
 import scalafxml.core.{NoDependencyResolver, FXMLLoader}
 import javafx.{scene => jfxs}
 import scalafx.collections.ObservableBuffer
 import model.Task
 import database.FileData
-import javafx.{scene => jfxs}
 import scalafx.stage.Modality
 import view.{AddTaskDialogController, EditTaskDialogController}
 
