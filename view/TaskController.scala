@@ -4,8 +4,9 @@ import model.Task
 import main.Application
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.GridPane
-import scalafx.scene.control.{TableView, TableColumn, TableCell, Label, ListView, ListCell, Button}
+import scalafx.scene.control.{Label, ListView, ListCell, Button}
 import scalafx.scene.control.SelectionModel
+import scalafx.scene.input.{KeyEvent, KeyCode}
 import scalafxml.core.macros.sfxml
 import scalafx.beans.property.{StringProperty, ObjectProperty} 
 import scalafx.Includes._
@@ -29,6 +30,18 @@ class TaskController(
   var currentView = "Default"
   updateUI()
   viewDefault.visible = false
+  
+  // On KeyPressed, Respond Accordingly
+  taskList.onKeyPressed = (action: KeyEvent) => {
+    // Press Delete to remove task (in Mac OS fn + delete is required)
+    if (action.code == KeyCode.DELETE) {
+      removeTask()
+    } 
+    // Press Ctrl + E to edit task
+    if (action.code == KeyCode.E && action.controlDown) {
+      editTask()
+    }
+  }
   setUpCell()
 
   // Add task after clicking button
@@ -61,28 +74,12 @@ class TaskController(
     }
   }
   
-  // Might need to be refactored
   def viewDoneTasks() = {
-    viewTasks("Done")
-    header.style = "-fx-background-color: #47afa0;"
-    currentView = "Done"
-    addButton.visible = false
-    doneButton.visible = false
-    editButton.visible = false
-    viewDone.visible = false
-    viewDefault.visible = true
-    
+    viewTasks("Done")    
   }
   
   def viewDefaultTasks() = {
     viewTasks()
-    header.style = "-fx-background-color: #316079;"
-    currentView = "Default"
-    addButton.visible = true
-    doneButton.visible = true
-    editButton.visible = true
-    viewDone.visible = true
-    viewDefault.visible = false
   }
   
   def checkTaskDone() = {
@@ -90,8 +87,7 @@ class TaskController(
     if (selectedIndex >= 0) {
       Application.data.doneTaskAt(selectedIndex)
       updateUI()
-    }
-    
+    }    
   }
   
   def removeTask() = {
@@ -103,16 +99,31 @@ class TaskController(
   }
   
   def updateUI() {
-    println("Updating UI")
-    setTableView(Application.data.getTasksBasedOn(currentView)) 
+    setListView(Application.data.getTasksBasedOn(currentView)) 
+  }
+  
+  private def colorFor(status: String = "Default") : String = {
+    if (status == "Done") return "#47afa0"
+    return "#316079"
   }
   
   private def viewTasks(status: String = "Default") = {
     val tempData = Application.data.getTasksBasedOn(status = status)
-    setTableView(tempData) 
+    setListView(tempData) 
+    header.style = s"-fx-background-color: ${colorFor(status)};"
+    currentView = status
+    toggleButtonVisibility()
   }
   
-  private def setTableView(data: Option[ObservableBuffer[Task]]) {
+  private def toggleButtonVisibility() {    
+    addButton.visible = !addButton.visible.value
+    doneButton.visible = !doneButton.visible.value
+    editButton.visible = !editButton.visible.value
+    viewDone.visible = !viewDone.visible.value
+    viewDefault.visible = !viewDefault.visible.value
+  }
+  
+  private def setListView(data: Option[ObservableBuffer[Task]]) {
     data match {
       case Some(i) => {
         taskList.setItems(i)
@@ -124,7 +135,8 @@ class TaskController(
   
   private def setUpCell() {
     taskList.cellFactory = { _ =>
-      new ListCell[Task]() {  
+      new ListCell[Task]() {          
+        // Update value in ListCell when Task Change
         item.onChange { (task, oldValue, newValue) => {
           if (newValue == null) {
             graphic = null
@@ -136,10 +148,9 @@ class TaskController(
             val controller = loader.getController[ToDoTaskListController#Controller]
             controller.index = this.index.value
             controller.task = task.value         
-            graphic = root
+            graphic = root 
           }
-        }
-        }
+        }}  
       }
     } 
   }

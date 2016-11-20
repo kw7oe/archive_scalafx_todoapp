@@ -6,6 +6,8 @@ import scalafx.scene.control.Alert.AlertType
 import scalafx.stage.Stage
 import scalafxml.core.macros.sfxml
 import scalafx.event.ActionEvent
+import scalafx.scene.input.{KeyEvent, KeyCode}
+import scalafx.Includes._
 
 @sfxml 
 class AddTaskDialogController(
@@ -20,14 +22,21 @@ class AddTaskDialogController(
     def task_=(x: Task) {
       _task = x
     }
-
     
-    def handleAddTask(action: ActionEvent) {
+    def handleAddTask() {
       _task.name <== taskNameField.text
       stripOffNewLine()
       _task.notes <== notesArea.text
       okClicked = true
       dialogStage.close()
+    }
+    
+    def handleKeyBoard(action: KeyEvent) {
+      if(action.code == KeyCode.ENTER) {
+        handleAddTask()
+      } else if (action.code == KeyCode.C && action.controlDown) {
+        handleCancel()
+      }
     }
     
     def handleCancel() {

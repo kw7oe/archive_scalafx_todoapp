@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="anchorPane" minWidth="-Infinity" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ToDoTaskListController">
+<AnchorPane fx:id="anchorPane" minWidth="-Infinity" onKeyPressed="#handleKeyBoard" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ToDoTaskListController">
    <children>
       <Label fx:id="taskName" layoutX="14.0" layoutY="6.0" prefHeight="18.0" prefWidth="177.0" text="Label" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
          <contextMenu>
