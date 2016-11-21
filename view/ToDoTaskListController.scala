@@ -42,12 +42,12 @@ class ToDoTaskListController(
        deleteTask()
       }
     }
+    
     def markTaskDone() {
       Application.data.doneTaskAt(index)
     }
     
     def deleteTask() {
-      println(task)
       Application.data.removeTaskAt(index, task.status.value)
     }
     
