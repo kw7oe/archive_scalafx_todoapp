@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="anchorPane" minWidth="-Infinity" prefWidth="249.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.view.ListCellController">
+   <children>
+      <Label fx:id="taskName" layoutX="14.0" layoutY="6.0" prefHeight="18.0" prefWidth="177.0" text="Label" textOverrun="WORD_ELLIPSIS" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem fx:id="viewMenuItem" mnemonicParsing="false" onAction="#viewTask" text="View" />
+                <MenuItem fx:id="editMenuItem" mnemonicParsing="false" onAction="#editTask" text="Edit" />
+                <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" onAction="#deleteTask" text="Delete" />
+              </items>
+            </ContextMenu>
+         </contextMenu></Label>
+      <Button fx:id="deleteButton" layoutX="182.0" layoutY="6.0" mnemonicParsing="false" onAction="#deleteTask" text="Delete" AnchorPane.rightAnchor="15.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <styleClass>
+            <String fx:value="delete_button" />
+            <String fx:value="roboto_bold_font" />
+         </styleClass></Button>
+      <Button fx:id="completeButton" layoutX="177.0" layoutY="6.0" mnemonicParsing="false" onAction="#markTaskCompleted" text="Complete" AnchorPane.rightAnchor="15.0">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <styleClass>
+            <String fx:value="complete_button" />
+            <String fx:value="roboto_bold_font" />
+         </styleClass></Button>
+   </children>
+</AnchorPane>

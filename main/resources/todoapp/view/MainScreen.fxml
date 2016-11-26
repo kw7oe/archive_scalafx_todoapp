@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="400.0" minWidth="200.0" prefHeight="464.0" prefWidth="350.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.view.TaskController">
+   <children>
+      <GridPane fx:id="header" prefHeight="70.0" prefWidth="400.0" styleClass="header_grid_pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="50.0" prefWidth="237.0" />
+            <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="SOMETIMES" maxWidth="127.0" minWidth="20.0" prefWidth="71.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="addButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addTask" styleClass="add_button" text="+" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <InnerShadow color="#00000069" />
+               </effect>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </Button>
+            <TextField fx:id="addTaskField" onKeyPressed="#enterToAddTask" promptText="What do you plan to do?" styleClass="task_field" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label fx:id="advanceAddLabel" onMouseClicked="#advanceAddTask" styleClass="advance_add_label" text="Advance Add Option" textFill="#ffffffe3" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="20.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="11.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </GridPane>
+      <ListView fx:id="taskList" layoutX="8.0" layoutY="103.0" styleClass="task_list" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0" />
+      <GridPane layoutX="84.0" layoutY="347.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="viewIncompleteButton" mnemonicParsing="false" onAction="#viewIncompleteTasks" text="Incomplete" GridPane.halignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="view_incomplete_button" />
+                  <String fx:value="roboto_bold_font" />
+               </styleClass>
+               <padding>
+                  <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
+               </padding>
+            </Button>
+            <Button fx:id="viewCompletedButton" mnemonicParsing="false" onAction="#viewCompletedTasks" text="Completed" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <styleClass>
+                  <String fx:value="view_button" />
+                  <String fx:value="roboto_bold_font" />
+               </styleClass>
+               <padding>
+                  <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
+               </padding>
+            </Button>
+         </children>
+      </GridPane>
+      <GridPane fx:id="header2" layoutX="110.0" layoutY="87.0" prefHeight="70.0" prefWidth="400.0" styleClass="header_grid_pane_2" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="taskCompletedLabel" text="Completed Tasks" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <styleClass>
+                  <String fx:value="title" />
+                  <String fx:value="roboto_bold_font" />
+               </styleClass></Label>
+         </children>
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="50.0" prefWidth="237.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>

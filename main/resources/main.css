@@ -1,0 +1,124 @@
+@font-face {
+	font-family: "Roboto Bold";
+	src: url("Roboto-Bold.ttf");
+}
+
+@font-face {
+	font-family: "Roboto";
+	src: url("Roboto-Regular.ttf");
+}
+
+.background_white {
+	-fx-background-color: #fff;
+}
+
+.custom_cell:filled:selected:focused, .custom_cell:filled:selected {
+	-fx-background-color: #dfe2e4;
+	-fx-text-fill: black;
+}
+
+.custom_cell {
+	-fx-cell-size: 38;
+}
+
+.custom_cell:odd {
+  -fx-background-color: #f9f9f9;
+}
+
+.custom_cell:even {
+  -fx-background-color: #fff;
+}
+.add_button {
+	-fx-background-color: white;
+	-fx-background-radius: 50% 50% 50% 50%;
+	-fx-text-fill: #424a4e;
+}
+
+.advance_add_label:hover {
+	-fx-border-color: white;
+	-fx-border-width: 0px 0px 1px 0px;
+}
+
+.default_button {
+	-fx-background-color: none;
+	-fx-text-fill: #657177;
+}
+
+.default_button:hover {
+	-fx-background-color: none;
+	-fx-text-fill: #424a4e;
+}
+
+.view_button {
+	-fx-border-color: #0ea990;
+	-fx-border-width: 1px;
+	-fx-background-color: white;
+	-fx-text-fill: #0ea990;
+}
+
+.view_button:hover {
+	-fx-background-color: #0ea990;
+	-fx-text-fill: white;
+}
+
+.view_incomplete_button {
+	-fx-border-color: #424a4e;
+	-fx-border-width: 1px;
+	-fx-background-color: white;
+	-fx-text-fill: #424a4e;
+}
+
+.view_incomplete_button:hover {
+	-fx-background-color: #424a4e;
+	-fx-text-fill: white;
+}
+
+.delete_button {
+	-fx-background-color: none;
+	-fx-text-fill: #cd1130;
+}
+
+.delete_button:hover {
+	-fx-text-fill: #850b1f;
+}
+
+.complete_button {
+	-fx-background-color: none;
+	-fx-text-fill: #0ea990;
+}
+
+.complete_button:hover {
+	-fx-text-fill: #0b8571;
+}
+
+.header_grid_pane {
+	-fx-background-color: #424a4e;
+}
+
+.header_grid_pane_2 {
+	-fx-background-color: #0ea990;
+}
+
+.task_field {
+	-fx-background-color: #424a4e;
+	-fx-text-fill: white;
+}
+
+.roboto_bold_font {
+
+	-fx-font-family: "Roboto";
+	-fx-font-weight: 700;
+}
+
+.title {
+	-fx-font-size: 24px;
+	-fx-text-fill: white;
+}
+
+.title_2 {
+	-fx-font-size: 24px;
+}
+
+.h3 {
+	-fx-font-size: 14px;
+}

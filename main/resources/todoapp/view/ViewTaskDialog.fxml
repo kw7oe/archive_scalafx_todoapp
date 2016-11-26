@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyBoard" prefHeight="250.0" prefWidth="300.0" styleClass="background_white" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="todoapp.view.ViewTaskDialogController">
+   <children>
+      <GridPane layoutX="30.0" layoutY="21.0" prefHeight="113.0" prefWidth="238.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="taskText" styleClass="roboto_bold_font" text="(Empty)">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label fx:id="notesText" text="No Description Available" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1" GridPane.valignment="TOP">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets top="10.0" />
+               </GridPane.margin></Label>
+         </children>
+      </GridPane>
+      <Button mnemonicParsing="false" onAction="#handleClose" text="CLOSE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+         <styleClass>
+            <String fx:value="default_button" />
+            <String fx:value="roboto_bold_font" />
+         </styleClass>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</AnchorPane>
