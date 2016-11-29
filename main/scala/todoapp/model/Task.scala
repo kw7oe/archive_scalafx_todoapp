@@ -10,10 +10,7 @@ class Task(name_ : String, notes_ : String, status_ : String) extends Serializab
 	def complete {
 		status.set("Completed")
   }
-  
-  def saveNotes(value: String) {
-   
-  }
+
   def getNotes() : StringProperty = {
     formatNotesFor(mode = "view")
     return notes
@@ -23,6 +20,8 @@ class Task(name_ : String, notes_ : String, status_ : String) extends Serializab
 		return s"${name.value},${notes.value},${status.value}\n"
 	}
 	
+	// Remove the newline in the notes, as a CSV
+	// file differentiate each data with a newline
 	def formatNotesFor(mode: String) {
 	  var text : String = ""
 	  if (mode == "csv") {

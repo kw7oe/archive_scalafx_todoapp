@@ -18,7 +18,6 @@ import todoapp.view._
 object Application extends JFXApp {  
   val rootResource = getClass.getResourceAsStream("view/RootLayout.fxml")  
   val data = new FileData()
-  data.readFile()
   val loader = new FXMLLoader(null, NoDependencyResolver)
   loader.load(rootResource)
   
@@ -31,7 +30,7 @@ object Application extends JFXApp {
     }
   }
   
-  def showMainScreen() = {
+  def showMainScreen() : Unit = {
     val resource = getClass.getResourceAsStream("view/MainScreen.fxml")
     val loader = new FXMLLoader(null, NoDependencyResolver)
     loader.load(resource)
@@ -99,7 +98,7 @@ object Application extends JFXApp {
     return controller.okClicked;
   }
   
-  def showAboutDialog() {
+  def showAboutDialog() : Unit = {
     val resource = getClass.getResourceAsStream("view/AboutDialog.fxml")
     val loader = new FXMLLoader(null, NoDependencyResolver)
     loader.load(resource)
@@ -116,7 +115,7 @@ object Application extends JFXApp {
     dialog.showAndWait();
   }
   
-  def showShortcutDialog() {
+  def showShortcutDialog() : Unit = {
     val resource = getClass.getResourceAsStream("view/ShortcutDialog.fxml")
     val loader = new FXMLLoader(null, NoDependencyResolver)
     loader.load(resource)
@@ -133,7 +132,7 @@ object Application extends JFXApp {
     dialog.showAndWait();
   }
   
-  def showNoTaskNameAlert() {
+  def showNoTaskNameAlert() : Unit = {
     val noTaskNameAlert = new Alert(AlertType.Warning) {
       initOwner(stage)
       title       = "Invalid Input"

@@ -33,12 +33,14 @@ class TaskController(
     headerText  = "No Task Selected"
     contentText = "Please select a task in the table."
   }
+  
+  // Initialize Everything That is necessary for the main screen
   initializeView()
   setUpKeyEvent()  
   setUpCell()
   setListView(data = Application.data.getTasksBasedOn(currentView))
 
-
+  // Add Task When Button is Clicked
   def addTask() {
     val taskName = addTaskField.text.value
     if (taskName.length == 0) {
@@ -51,12 +53,14 @@ class TaskController(
     }  
   }
   
+  // Add Task When User press Enter after task name is provided in the Text Field
   def enterToAddTask(action: KeyEvent) {
     if (action.code == KeyCode.ENTER) {
       addTask()
     }
   }
   
+  // Allow User to add notes during Add Task
   def advanceAddTask(action: MouseEvent) {
     if (action.button == MouseButton.PRIMARY) {
       val tempTask = Task("", "", "Default")
@@ -71,10 +75,15 @@ class TaskController(
   def editTask() {
     val selectedIndex = taskList.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) {
-      val selectedTask = Application.data.getTasks()(selectedIndex)
+      // Note that "getTaskBasedOn(currentView)" return a Option[ObservableBuffer[Task]]
+      //   - When the user are able to select the ListCell,
+      //     it also means that the ObservableBuffer[Task] is  
+      //     definitely not "null". So, we can call "get" directly
+      //     without worrying the NullPointerException.
+      val selectedTask = Application.data.getTasksBasedOn(currentView).get(selectedIndex)
       val onClicked = Application.showEditTaskDialog(selectedTask)
        if (onClicked) {
-          Application.data.writeFile()
+          Application.data.editTask()
           setListView(data = Application.data.getTasksBasedOn(currentView))     
        } 
     } else {
@@ -85,7 +94,7 @@ class TaskController(
   def viewTask() {
     val selectedIndex = taskList.selectionModel().selectedIndex.value
     if (selectedIndex >= 0) {
-      val selectedTask = Application.data.getTasks()(selectedIndex)
+      val selectedTask = Application.data.getTasksBasedOn(currentView).get(selectedIndex)
       val onClicked = Application.showViewTaskDialog(selectedTask)
     } else {
       noSelectionAlert.showAndWait()
@@ -116,18 +125,20 @@ class TaskController(
     }
   }  
   
+  // Hide certain UI components during the initialization
   private def initializeView() {
     viewIncompleteButton.visible = false
     header2.visible = false
   }
   
+  // Toggle Different View depending on User Selection
   private def toggleViewMode() {
     viewIncompleteButton.visible = !viewIncompleteButton.visible.value
     viewCompletedButton.visible = !viewCompletedButton.visible.value
     header2.visible = !header2.visible.value
     header.visible = !header.visible.value
   }
-  
+
   private def viewAllTasks(status: String = "Default") {
     val tempData = Application.data.getTasksBasedOn(status)
     setListView(tempData) 
@@ -143,6 +154,7 @@ class TaskController(
     }
   }
   
+  // Update the items in the ListView
   private def setListView(data: Option[ObservableBuffer[Task]]) {
     data match {
       case Some(i) => {
@@ -151,7 +163,8 @@ class TaskController(
       case None => println("List is Empty")
     }   
   }
-
+  
+  // Setup proper response for certain Key Event
   private def setUpKeyEvent() {
     taskList.onKeyPressed = (action: KeyEvent) => {
       action.code match {
@@ -165,6 +178,7 @@ class TaskController(
     }
   }
   
+  // Customize the ListCell in the ListView
   private def setUpCell() {
     taskList.cellFactory = { _ =>
       new ListCell[Task]() {  
@@ -174,7 +188,7 @@ class TaskController(
             graphic = null
           } else {
             val loader = new FXMLLoader(null, NoDependencyResolver)
-            val resource = getClass.getResourceAsStream("../view/ToDoTaskListCell.fxml")
+            val resource = getClass.getResourceAsStream("ToDoTaskListCell.fxml")
             loader.load(resource)    
             val root = loader.getRoot[jfxs.layout.AnchorPane]
             val controller = loader.getController[ListCellController#Controller]

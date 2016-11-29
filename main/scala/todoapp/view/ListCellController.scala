@@ -48,7 +48,7 @@ class ListCellController(
     def editTask() {
       val onClicked = Application.showEditTaskDialog(task)
       if (onClicked) {
-          Application.data.writeFile()  
+          Application.data.editTask()
       }
     }
     
@@ -56,6 +56,7 @@ class ListCellController(
       Application.showViewTaskDialog(task)
     }
     
+    // Toggle Different View when Task Status is Different
     private def manageViewMode {
       completeButton.visible = false
       editMenuItem.visible = false
